@@ -1,4 +1,4 @@
-# Customer Shopping Behavior Analysis (Online Retail Dataset)
+# Customer Shopping Behavior Analysis 
 
 An end-to-end RFM (Recency, Frequency, Monetary) analysis of a real
 UK-based online retailer's transaction data, identifying which customers
@@ -24,17 +24,6 @@ which is reflected in the findings below.
 - **SQL** (PostgreSQL syntax) — segment-level business queries with CTEs and window functions
 - **Jupyter Notebook** for the analysis walkthrough
 
-## Repository Structure
-
-```
-├── Customer_Shopping_Behavior_Analysis.ipynb   # cleaning, EDA, RFM segmentation
-├── online_retail.csv                           # raw input data (from Online Retail.xlsx)
-├── online_retail_cleaned.csv                   # cleaned transactions + rfm_segment (feeds SQL/BI)
-├── customer_rfm_summary.csv                    # one row per customer: R/F/M values, scores, segment
-├── customer_behaviour_insights.sql             # segment-based SQL analysis
-├── REPORT.md                                   # findings & recommendations
-└── charts/                                     # exported EDA & segmentation charts
-```
 
 ## How to Run
 
@@ -44,34 +33,6 @@ which is reflected in the findings below.
 3. Load both CSVs into PostgreSQL (see the optional cell in the notebook)
    as tables `online_retail` and `customer_rfm`.
 4. Run `customer_behaviour_insights.sql` against those tables.
-5. (Optional) Build a Power BI / Tableau dashboard on top of
-   `online_retail_cleaned.csv` and `customer_rfm_summary.csv` — see note below.
+5. Build a Power BI / Tableau dashboard on top of
+   `online_retail_cleaned.csv` and `customer_rfm_summary.csv`
 
-## Method: RFM Segmentation
-
-Because this dataset has real invoice dates, RFM is computed directly
-(not approximated): each customer is scored 1–4 on Recency, Frequency,
-and Monetary value (quartile-based), and the combined score maps to a
-segment.
-
-| Segment | Meaning |
-|---|---|
-| **Champions** | Recent, frequent, high-spending customers |
-| **Loyal** | Consistently good customers, slightly below top tier |
-| **Potential Loyalist** | Decent recent activity, not yet high-frequency |
-| **At Risk** | Used to be active, recency/frequency has dropped |
-| **Needs Attention** | Low across recency, frequency, and spend |
-
-## Key Findings
-
-See [REPORT.md](REPORT.md) for the full write-up with numbers and recommendations.
-
-## Note on the Dashboard
-
-This version of the project does not include a Power BI file. The
-original repo's `.pbix` was built against a different (fashion-retail)
-dataset schema and doesn't map onto the Online Retail dataset's columns
-(invoices, countries, dates) — rebuilding it would mean starting a new
-dashboard, not editing the old one. `online_retail_cleaned.csv` and
-`customer_rfm_summary.csv` are ready to plug straight into a fresh Power
-BI / Tableau file if you want to add one.
